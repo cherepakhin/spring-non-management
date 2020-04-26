@@ -5,6 +5,9 @@ import javax.validation.constraints.NotNull;
 public class SimpleEntity {
     private String name;
 
+    public SimpleEntity() {
+    }
+
     public SimpleEntity(@NotNull String name) {
         this.name = name;
     }
@@ -15,5 +18,12 @@ public class SimpleEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleEntity{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
