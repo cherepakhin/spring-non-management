@@ -1,0 +1,11 @@
+management:
+  endpoints:
+    web:
+      exposure.include: metrics,health,prometheus
+#      web.base-path: /actuator
+spring:
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:8080
+
