@@ -7,3 +7,52 @@
 https://www.sql.ru/forum/1324644-1/poluchenie-spring-beans-v-klasse-neupravlyaemom-spring[Обсуждение на sql.ru]
 
 https://overload.yandex.net/268597#tab=test_data&tags=&plot_groups=tables&machines=&metrics=&slider_start=1587917491&slider_end=1587917501&compress_ratio=1[Результаты нагрузочного тесирования контроллера EchoCtrl с разными типами внедрения зависимости]
+
+.EchoCtrl.java
+[source,java]
+----
+@RestController
+@RequestMapping("/test")
+public class EchoCtrl {
+    private static final Logger LOG= LoggerFactory.getLogger(EchoCtrl.class);
+
+    @Autowired
+    IServiceForFree serviceForFree;
+
+    @GetMapping(value = "echo")
+    public SimpleEntity get(@RequestParam(required = false) String name) {
+        return new SimpleEntity(name);
+    }
+
+    @PostMapping(value = "save", produces = MediaType.APPLICATION_JSON_VALUE)
+    public SimpleEntity save(@RequestBody SimpleEntity dtoIn) {
+        return new SimpleEntity(dtoIn.getName());
+    }
+
+    // Тут создается Entity обычным способом, но внутри spring динамически подключает сервис
+    @GetMapping(value = "dynamic")
+    public SimpleEntity getDynamic(@RequestParam(required = false) String name) {
+        DynamicEntity dynamicEntity = new DynamicEntity();
+        return dynamicEntity.getSimpleEntity(name);
+    }
+
+    @GetMapping(value = "spring")
+    public String getSpringBean(@RequestParam(required = false) String name) {
+        return serviceForFree.getVal(name);
+    }
+}
+----
+
+.DynamicEntity.java
+[source,java]
+----
+@Configurable(preConstruction = true, autowire = Autowire.BY_TYPE, dependencyCheck = true)
+public class DynamicEntity {
+    @Autowired
+    IServiceForFree serviceForFree;
+
+    public SimpleEntity getSimpleEntity(String val) {
+        return new SimpleEntity(serviceForFree.getVal(val));
+    }
+}
+----
