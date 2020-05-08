@@ -5,3 +5,4 @@
 Представь другую схему. Создавай объекты какие хочешь. Его созданием, поведением сам рулишь. Он может быть и не одиночка, и доступен GC. А этому объекту вдруг понадобится доступ к например репозиторию.
 
 https://www.sql.ru/forum/1324644-1/poluchenie-spring-beans-v-klasse-neupravlyaemom-spring[Обсуждение на sql.ru]
+https://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=1324644&msg=22123183[Результаты нагрузочного тесирования]
