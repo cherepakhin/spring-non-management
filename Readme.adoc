@@ -8,6 +8,7 @@ https://www.sql.ru/forum/1324644-1/poluchenie-spring-beans-v-klasse-neupravlyaem
 
 https://overload.yandex.net/268597#tab=test_data&tags=&plot_groups=tables&machines=&metrics=&slider_start=1587917491&slider_end=1587917501&compress_ratio=1[Результаты нагрузочного тесирования контроллера EchoCtrl с разными типами внедрения зависимости]
 
+image::src/file.png[]
 .EchoCtrl.java
 [source,java]
 ----
